@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GaugeAPI
 {
@@ -19,6 +20,17 @@ namespace GaugeAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // global
+
+            //   var corsAttr = new EnableCorsAttribute("http://10.100.1.151:8091", "*", "*");
+
+            //local
+            config.EnableCors();
+
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttr);
+
         }
     }
 }

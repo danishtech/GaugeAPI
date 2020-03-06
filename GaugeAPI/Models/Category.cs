@@ -24,13 +24,13 @@ namespace GaugeAPI.Models
         public int Weight { get; set; }
         public string Question { get; set; }
         public string Answers { get; set; }
-        public int Score { get; set; }
+        public string Score { get; set; }
         public Nullable<int> Selected_score { get; set; }
         public Nullable<int> Average_score { get; set; }
         public Nullable<int> Score_per_indicator { get; set; }
         public Nullable<int> Average_score_per_criteria { get; set; }
-        public Nullable<int> Final_score_per_indicator___international_events { get; set; }
-        public Nullable<int> Final_score_per_indicator___national_events { get; set; }
+        public Nullable<double> Final_score_per_indicator___international_events { get; set; }
+        public Nullable<double> Final_score_per_indicator___national_events { get; set; }
         public int CreatedByID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int ModifiedByID { get; set; }

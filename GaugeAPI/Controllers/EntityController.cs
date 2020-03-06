@@ -9,48 +9,47 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GaugeAPI.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace GaugeAPI.Controllers
 {
-    public class SchoolController : ApiController
+    public class EntityController : ApiController
     {
         private GaugeEntities db = new GaugeEntities();
 
-        // GET: api/School
-        public IQueryable<School> GetSchools()
+        // GET: api/Entity
+        public IQueryable<Entity> GetEntities()
         {
-            return db.Schools;
+            return db.Entities;
         }
 
-        // GET: api/School/5
-        [ResponseType(typeof(School))]
-        public IHttpActionResult GetSchool(int id)
+        // GET: api/Entity/5
+        [ResponseType(typeof(Entity))]
+        public IHttpActionResult GetEntity(int id)
         {
-            School school = db.Schools.Find(id);
-            if (school == null)
+            Entity entity = db.Entities.Find(id);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return Ok(school);
+            return Ok(entity);
         }
 
-        // PUT: api/School/5
+        // PUT: api/Entity/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSchool(int id, School school)
+        public IHttpActionResult PutEntity(int id, Entity entity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != school.SchoolID)
+            if (id != entity.EntityID)
             {
                 return BadRequest();
             }
 
-            db.Entry(school).State = EntityState.Modified;
+            db.Entry(entity).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +57,7 @@ namespace GaugeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SchoolExists(id))
+                if (!EntityExists(id))
                 {
                     return NotFound();
                 }
@@ -71,36 +70,35 @@ namespace GaugeAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/School
-        [ResponseType(typeof(School))]
-        public IHttpActionResult PostSchool(School school)
+        // POST: api/Entity
+        [ResponseType(typeof(Entity))]
+        public IHttpActionResult PostEntity(Entity entity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Schools.Add(school);
+            db.Entities.Add(entity);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = school.SchoolID }, school);
+            return CreatedAtRoute("DefaultApi", new { id = entity.EntityID }, entity);
         }
 
-        // DELETE: api/School/5
-        [ResponseType(typeof(School))]
-        public IHttpActionResult DeleteSchool(int id)
+        // DELETE: api/Entity/5
+        [ResponseType(typeof(Entity))]
+        public IHttpActionResult DeleteEntity(int id)
         {
-           
-            School school = db.Schools.Find(id);
-            if (school == null)
+            Entity entity = db.Entities.Find(id);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            db.Schools.Remove(school);
+            db.Entities.Remove(entity);
             db.SaveChanges();
-            db.SaveChangesAsync();
-            return Ok(school);
+
+            return Ok(entity);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,10 +110,9 @@ namespace GaugeAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SchoolExists(int id)
+        private bool EntityExists(int id)
         {
-            return db.Schools.Count(e => e.SchoolID == id) > 0;
-
+            return db.Entities.Count(e => e.EntityID == id) > 0;
         }
     }
 }

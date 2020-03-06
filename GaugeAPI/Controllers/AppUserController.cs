@@ -9,48 +9,47 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GaugeAPI.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace GaugeAPI.Controllers
 {
-    public class SchoolController : ApiController
+    public class AppUserController : ApiController
     {
         private GaugeEntities db = new GaugeEntities();
 
-        // GET: api/School
-        public IQueryable<School> GetSchools()
+        // GET: api/AppUser
+        public IQueryable<AppUser> GetAppUsers()
         {
-            return db.Schools;
+            return db.AppUsers;
         }
 
-        // GET: api/School/5
-        [ResponseType(typeof(School))]
-        public IHttpActionResult GetSchool(int id)
+        // GET: api/AppUser/5
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult GetAppUser(int id)
         {
-            School school = db.Schools.Find(id);
-            if (school == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            return Ok(school);
+            return Ok(appUser);
         }
 
-        // PUT: api/School/5
+        // PUT: api/AppUser/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSchool(int id, School school)
+        public IHttpActionResult PutAppUser(int id, AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != school.SchoolID)
+            if (id != appUser.AppUserID)
             {
                 return BadRequest();
             }
 
-            db.Entry(school).State = EntityState.Modified;
+            db.Entry(appUser).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +57,7 @@ namespace GaugeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SchoolExists(id))
+                if (!AppUserExists(id))
                 {
                     return NotFound();
                 }
@@ -71,36 +70,35 @@ namespace GaugeAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/School
-        [ResponseType(typeof(School))]
-        public IHttpActionResult PostSchool(School school)
+        // POST: api/AppUser
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult PostAppUser(AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Schools.Add(school);
+            db.AppUsers.Add(appUser);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = school.SchoolID }, school);
+            return CreatedAtRoute("DefaultApi", new { id = appUser.AppUserID }, appUser);
         }
 
-        // DELETE: api/School/5
-        [ResponseType(typeof(School))]
-        public IHttpActionResult DeleteSchool(int id)
+        // DELETE: api/AppUser/5
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult DeleteAppUser(int id)
         {
-           
-            School school = db.Schools.Find(id);
-            if (school == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            db.Schools.Remove(school);
+            db.AppUsers.Remove(appUser);
             db.SaveChanges();
-            db.SaveChangesAsync();
-            return Ok(school);
+
+            return Ok(appUser);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,10 +110,9 @@ namespace GaugeAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SchoolExists(int id)
+        private bool AppUserExists(int id)
         {
-            return db.Schools.Count(e => e.SchoolID == id) > 0;
-
+            return db.AppUsers.Count(e => e.AppUserID == id) > 0;
         }
     }
 }

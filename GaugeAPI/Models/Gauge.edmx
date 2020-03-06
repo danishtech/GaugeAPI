@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GaugeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GaugeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppUser">
           <Key>
             <PropertyRef Name="AppUserID" />
@@ -44,19 +44,19 @@
           <Property Name="CategoryName" Type="varchar" MaxLength="50" />
           <Property Name="Importance (in %) - International events" Type="int" />
           <Property Name="Importance (in %) - National events" Type="int" />
-          <Property Name="Criteria" Type="varchar" MaxLength="50" />
-          <Property Name="Indicators" Type="varchar" MaxLength="50" />
+          <Property Name="Criteria" Type="varchar" MaxLength="500" />
+          <Property Name="Indicators" Type="varchar" MaxLength="500" />
           <Property Name="Source" Type="varchar" MaxLength="20" />
           <Property Name="Weight" Type="int" Nullable="false" />
-          <Property Name="Question" Type="varchar" MaxLength="50" />
-          <Property Name="Answers" Type="varchar" MaxLength="100" />
-          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="500" />
+          <Property Name="Answers" Type="varchar" MaxLength="500" />
+          <Property Name="Score" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Selected score" Type="int" />
           <Property Name="Average score" Type="int" />
           <Property Name="Score per indicator" Type="int" />
           <Property Name="Average score per criteria" Type="int" />
-          <Property Name="Final score per indicator - international events" Type="int" />
-          <Property Name="Final score per indicator - national events" Type="int" />
+          <Property Name="Final score per indicator - international events" Type="float" />
+          <Property Name="Final score per indicator - national events" Type="float" />
           <Property Name="CreatedByID" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedByID" Type="int" Nullable="false" />
@@ -114,22 +114,40 @@
           </Key>
           <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventName" Type="varchar" MaxLength="50" />
-          <Property Name="Criteria" Type="varchar" MaxLength="50" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Venue" Type="varchar" MaxLength="50" />
-          <Property Name="Source" Type="varchar" MaxLength="20" />
-          <Property Name="Weight" Type="int" Nullable="false" />
-          <Property Name="Budget" Type="varchar" MaxLength="50" />
-          <Property Name="Category" Type="varchar" MaxLength="50" />
-          <Property Name="Type" Type="varchar" MaxLength="50" />
-          <Property Name="Frequency" Type="varchar" MaxLength="50" />
+          <Property Name="EventCriteria" Type="varchar" MaxLength="50" />
+          <Property Name="EventStartDate" Type="datetime" />
+          <Property Name="EventEndDate" Type="datetime" />
+          <Property Name="EventDescription" Type="varchar" MaxLength="500" />
+          <Property Name="EventVenue" Type="varchar" MaxLength="50" />
+          <Property Name="EventSource" Type="varchar" MaxLength="20" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="EventBudget" Type="varchar" MaxLength="50" />
+          <Property Name="EventCategory" Type="varchar" MaxLength="50" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" />
+          <Property Name="EventFrequency" Type="varchar" MaxLength="50" />
+          <Property Name="EventCordinatorName" Type="varchar" MaxLength="100" />
+          <Property Name="EventCordinatorMobileNumber" Type="varchar" MaxLength="50" />
+          <Property Name="EventCordinatorEmail" Type="varchar" MaxLength="100" />
           <Property Name="Estimated Number of Participants" Type="varchar" MaxLength="50" />
           <Property Name="Estimated Number of Attendees" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedByID" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedByID" Type="int" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedByID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedByID" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="500" />
+          <Property Name="Answer" Type="varchar" MaxLength="500" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="School">
           <Key>
@@ -200,11 +218,11 @@
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Entity" EntityType="Self.Entity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GaugeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -234,32 +252,6 @@
           <Property Name="SortNameFirstLast" Type="String" MaxLength="101" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="SortNameLastFirst" Type="String" MaxLength="102" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="DisplayName" Type="String" MaxLength="141" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Importance__in______International_events" Type="Int32" />
-          <Property Name="Importance__in______National_events" Type="Int32" />
-          <Property Name="Criteria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Indicators" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Int32" Nullable="false" />
-          <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Answers" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Score" Type="Int32" Nullable="false" />
-          <Property Name="Selected_score" Type="Int32" />
-          <Property Name="Average_score" Type="Int32" />
-          <Property Name="Score_per_indicator" Type="Int32" />
-          <Property Name="Average_score_per_criteria" Type="Int32" />
-          <Property Name="Final_score_per_indicator___international_events" Type="Int32" />
-          <Property Name="Final_score_per_indicator___national_events" Type="Int32" />
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
@@ -311,29 +303,6 @@
           <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="EventID" />
-          </Key>
-          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Criteria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Venue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Int32" Nullable="false" />
-          <Property Name="Budget" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estimated_Number_of_Participants" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estimated_Number_of_Attendees" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
         <EntityType Name="School">
           <Key>
             <PropertyRef Name="SchoolID" />
@@ -368,10 +337,8 @@
         </EntityType>
         <EntityContainer Name="GaugeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Entities" EntityType="Self.Entity" />
-          <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Schools" EntityType="Self.School" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <FunctionImport Name="sp_alterdiagram">
@@ -404,6 +371,9 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Events" EntityType="GaugeModel.Event" />
+          <EntitySet Name="Category" EntityType="GaugeModel.Category" />
+          <EntitySet Name="Result" EntityType="GaugeModel.Result" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -416,6 +386,73 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventCriteria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EventEndDate" Type="DateTime" Precision="3" />
+          <Property Name="EventDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventVenue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventSource" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="EventBudget" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventFrequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventCordinatorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EventCordinatorMobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventCordinatorEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estimated_Number_of_Participants" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estimated_Number_of_Attendees" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Importance__in______International_events" Type="Int32" />
+          <Property Name="Importance__in______National_events" Type="Int32" />
+          <Property Name="Criteria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Indicators" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Answers" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Score" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Selected_score" Type="Int32" />
+          <Property Name="Average_score" Type="Int32" />
+          <Property Name="Score_per_indicator" Type="Int32" />
+          <Property Name="Average_score_per_criteria" Type="Int32" />
+          <Property Name="Final_score_per_indicator___international_events" Type="Double" />
+          <Property Name="Final_score_per_indicator___national_events" Type="Double" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -447,33 +484,6 @@
                 <ScalarProperty Name="SortNameFirstLast" ColumnName="SortNameFirstLast" />
                 <ScalarProperty Name="SortNameLastFirst" ColumnName="SortNameLastFirst" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="GaugeModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="Importance__in______International_events" ColumnName="Importance (in %) - International events" />
-                <ScalarProperty Name="Importance__in______National_events" ColumnName="Importance (in %) - National events" />
-                <ScalarProperty Name="Criteria" ColumnName="Criteria" />
-                <ScalarProperty Name="Indicators" ColumnName="Indicators" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answers" ColumnName="Answers" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
-                <ScalarProperty Name="Selected_score" ColumnName="Selected score" />
-                <ScalarProperty Name="Average_score" ColumnName="Average score" />
-                <ScalarProperty Name="Score_per_indicator" ColumnName="Score per indicator" />
-                <ScalarProperty Name="Average_score_per_criteria" ColumnName="Average score per criteria" />
-                <ScalarProperty Name="Final_score_per_indicator___international_events" ColumnName="Final score per indicator - international events" />
-                <ScalarProperty Name="Final_score_per_indicator___national_events" ColumnName="Final score per indicator - national events" />
                 <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
@@ -522,30 +532,6 @@
                 <ScalarProperty Name="E_mail_Address" ColumnName="E-mail Address" />
                 <ScalarProperty Name="Managing_Director_Name" ColumnName="Managing Director Name" />
                 <ScalarProperty Name="E_mail_Address_Director" ColumnName="E-mail Address Director" />
-                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="GaugeModel.Event">
-              <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="Criteria" ColumnName="Criteria" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Venue" ColumnName="Venue" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Budget" ColumnName="Budget" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="Estimated_Number_of_Participants" ColumnName="Estimated Number of Participants" />
-                <ScalarProperty Name="Estimated_Number_of_Attendees" ColumnName="Estimated Number of Attendees" />
                 <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
@@ -611,7 +597,77 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GaugeModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GaugeModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="GaugeModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="Estimated_Number_of_Attendees" ColumnName="Estimated Number of Attendees" />
+                <ScalarProperty Name="Estimated_Number_of_Participants" ColumnName="Estimated Number of Participants" />
+                <ScalarProperty Name="EventCordinatorEmail" ColumnName="EventCordinatorEmail" />
+                <ScalarProperty Name="EventCordinatorMobileNumber" ColumnName="EventCordinatorMobileNumber" />
+                <ScalarProperty Name="EventCordinatorName" ColumnName="EventCordinatorName" />
+                <ScalarProperty Name="EventFrequency" ColumnName="EventFrequency" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="EventCategory" ColumnName="EventCategory" />
+                <ScalarProperty Name="EventBudget" ColumnName="EventBudget" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="EventSource" ColumnName="EventSource" />
+                <ScalarProperty Name="EventVenue" ColumnName="EventVenue" />
+                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+                <ScalarProperty Name="EventEndDate" ColumnName="EventEndDate" />
+                <ScalarProperty Name="EventStartDate" ColumnName="EventStartDate" />
+                <ScalarProperty Name="EventCriteria" ColumnName="EventCriteria" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="GaugeModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="Final_score_per_indicator___national_events" ColumnName="Final score per indicator - national events" />
+                <ScalarProperty Name="Final_score_per_indicator___international_events" ColumnName="Final score per indicator - international events" />
+                <ScalarProperty Name="Average_score_per_criteria" ColumnName="Average score per criteria" />
+                <ScalarProperty Name="Score_per_indicator" ColumnName="Score per indicator" />
+                <ScalarProperty Name="Average_score" ColumnName="Average score" />
+                <ScalarProperty Name="Selected_score" ColumnName="Selected score" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Answers" ColumnName="Answers" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Indicators" ColumnName="Indicators" />
+                <ScalarProperty Name="Criteria" ColumnName="Criteria" />
+                <ScalarProperty Name="Importance__in______National_events" ColumnName="Importance (in %) - National events" />
+                <ScalarProperty Name="Importance__in______International_events" ColumnName="Importance (in %) - International events" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Result">
+            <EntityTypeMapping TypeName="GaugeModel.Result">
+              <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -625,8 +681,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

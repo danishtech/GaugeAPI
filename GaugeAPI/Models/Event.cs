@@ -16,21 +16,25 @@ namespace GaugeAPI.Models
     {
         public int EventID { get; set; }
         public string EventName { get; set; }
-        public string Criteria { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public string Venue { get; set; }
-        public string Source { get; set; }
-        public int Weight { get; set; }
-        public string Budget { get; set; }
-        public string Category { get; set; }
-        public string Type { get; set; }
-        public string Frequency { get; set; }
+        public string EventCriteria { get; set; }
+        public Nullable<System.DateTime> EventStartDate { get; set; }
+        public Nullable<System.DateTime> EventEndDate { get; set; }
+        public string EventDescription { get; set; }
+        public string EventVenue { get; set; }
+        public string EventSource { get; set; }
+        public Nullable<int> Weight { get; set; }
+        public string EventBudget { get; set; }
+        public string EventCategory { get; set; }
+        public string EventType { get; set; }
+        public string EventFrequency { get; set; }
+        public string EventCordinatorName { get; set; }
+        public string EventCordinatorMobileNumber { get; set; }
+        public string EventCordinatorEmail { get; set; }
         public string Estimated_Number_of_Participants { get; set; }
         public string Estimated_Number_of_Attendees { get; set; }
-        public int CreatedByID { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public int ModifiedByID { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<int> CreatedByID { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> ModifiedByID { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
 }

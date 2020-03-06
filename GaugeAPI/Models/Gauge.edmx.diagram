@@ -6,12 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="544688bed7074d9da11315249438fe48" Name="Diagram1">
         <EntityTypeShape EntityType="GaugeModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GaugeModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GaugeModel.Company" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GaugeModel.Entity" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GaugeModel.Event" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GaugeModel.School" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GaugeModel.sysdiagram" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GaugeModel.Event" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="GaugeModel.Category" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GaugeModel.Result" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

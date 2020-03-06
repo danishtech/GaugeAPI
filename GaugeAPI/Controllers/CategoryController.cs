@@ -17,16 +17,16 @@ namespace GaugeAPI.Controllers
         private GaugeEntities db = new GaugeEntities();
 
         // GET: api/Category
-        public IQueryable<Category> GetCategories()
+        public IQueryable<Category> GetCategory()
         {
-            return db.Categories;
+            return db.Category;
         }
 
         // GET: api/Category/5
         [ResponseType(typeof(Category))]
         public IHttpActionResult GetCategory(int id)
         {
-            Category category = db.Categories.Find(id);
+            Category category = db.Category.Find(id);
             if (category == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace GaugeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Categories.Add(category);
+            db.Category.Add(category);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryID }, category);
@@ -89,13 +89,13 @@ namespace GaugeAPI.Controllers
         [ResponseType(typeof(Category))]
         public IHttpActionResult DeleteCategory(int id)
         {
-            Category category = db.Categories.Find(id);
+            Category category = db.Category.Find(id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(category);
+            db.Category.Remove(category);
             db.SaveChanges();
 
             return Ok(category);
@@ -112,7 +112,7 @@ namespace GaugeAPI.Controllers
 
         private bool CategoryExists(int id)
         {
-            return db.Categories.Count(e => e.CategoryID == id) > 0;
+            return db.Category.Count(e => e.CategoryID == id) > 0;
         }
     }
 }
